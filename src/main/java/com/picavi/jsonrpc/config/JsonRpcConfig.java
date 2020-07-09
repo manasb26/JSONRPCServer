@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.picavi.jsonrpc.model.ClassMetadata;
 import com.picavi.jsonrpc.model.Request;
+import com.picavi.jsonrpc.rpc.OrderPicking;
 import com.picavi.jsonrpc.rpc.SystemAuth;
 
 @Configuration
@@ -20,6 +21,7 @@ public class JsonRpcConfig {
 	public void registerMethod() {
 		try {
 			setLoginMethod();
+			setPickListMethod();
 		} catch (NoSuchMethodException | SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -32,6 +34,13 @@ public class JsonRpcConfig {
 		String className = SystemAuth.class.getName();
 		ClassMetadata classMetadata = new ClassMetadata(loginMethod, className);
 		requestBroker.add("system.login", classMetadata);
+	}
+	
+	private void setPickListMethod() throws NoSuchMethodException, SecurityException {
+		Method getPickListMethod = OrderPicking.class.getMethod("getPickList", Request.class);
+		String className = OrderPicking.class.getName();
+		ClassMetadata classMetadata = new ClassMetadata(getPickListMethod, className);
+		requestBroker.add("orderPicking.getPickList", classMetadata);
 	}
 
 }
