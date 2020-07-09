@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.picavi.jsonrpc.handler.JsonRpcRequestHandler;
 import com.picavi.jsonrpc.model.Request;
 import com.picavi.jsonrpc.model.Response;
+import com.picavi.jsonrpc.validator.JsonRpcRequestValidator;
 
 @Controller
 @RequestMapping("/")
@@ -18,9 +19,13 @@ public class JsonRpcController {
 
 	@Autowired
 	private JsonRpcRequestHandler requestHandler;
+	
+	@Autowired
+	private JsonRpcRequestValidator requestValidator;
 
 	@PostMapping
-	public ResponseEntity<Response> getMinimal(@RequestBody Request request) {
+	public ResponseEntity<Response> handleRequest(@RequestBody Request request) {
+		requestValidator.validateRequest(request);
 		Response response = requestHandler.handleRequest(request);
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}

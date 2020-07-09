@@ -16,8 +16,7 @@ public class SystemAuth {
 
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode credentialRequest = request.getParams();
-		Credentials credentials;
-		credentials = mapper.treeToValue(credentialRequest, Credentials.class);
+		Credentials credentials = mapper.treeToValue(credentialRequest, Credentials.class);
 		return new SuccessResponse(request.getId(), credentials);
 	}
 

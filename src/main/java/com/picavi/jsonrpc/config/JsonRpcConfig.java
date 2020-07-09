@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.picavi.jsonrpc.exception.InternalException;
 import com.picavi.jsonrpc.model.ClassMetadata;
 import com.picavi.jsonrpc.model.Request;
 import com.picavi.jsonrpc.rpc.OrderPicking;
@@ -23,8 +24,7 @@ public class JsonRpcConfig {
 			setLoginMethod();
 			setPickListMethod();
 		} catch (NoSuchMethodException | SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new InternalException("Internal error");
 		}
 
 	}
