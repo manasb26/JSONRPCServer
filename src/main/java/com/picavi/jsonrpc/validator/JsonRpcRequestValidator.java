@@ -20,7 +20,7 @@ public class JsonRpcRequestValidator {
 
 			else if (request.getId().isNull())
 				throw new InvalidRequestException(
-						"Invalid Request. The Notification requests are not yet supported!");
+						"Invalid Request");
 		}
 	}
 }

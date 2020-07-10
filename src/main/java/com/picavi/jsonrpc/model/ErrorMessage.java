@@ -2,6 +2,8 @@ package com.picavi.jsonrpc.model;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -14,6 +16,7 @@ public class ErrorMessage {
 	@JsonProperty("message")
 	private String message;
 
+	@JsonInclude(Include.NON_NULL)
 	@JsonProperty("data")
 	private JsonNode data;
 

@@ -50,7 +50,7 @@ public class JsonRpcExceptionHandler {
 	
 	@ExceptionHandler
 	public ResponseEntity<ErrorResponse> handleException(Exception exception) {
-		ErrorMessage error = new ErrorMessage(INTERNAL_ERROR_CODE, exception.getMessage(), null);
+		ErrorMessage error = new ErrorMessage(INTERNAL_ERROR_CODE, "Internal Error", null);
 		ErrorResponse errorResponse = new ErrorResponse(error);
 		return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);		
 	}
